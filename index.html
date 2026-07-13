@@ -193,6 +193,52 @@
                 showToast("Error copying code.", "error");
             });
         });
+        
+                // 4. FIXED: Copies Form HTML wrapped with a matching Styled Dark Body Tag
+        exportBtn.addEventListener('click', () => {
+            const inputsList = dynamicFormContainer.querySelectorAll('input');
+            const totalFieldsCount = dynamicFormContainer.children.length;
+
+            // Condition 1: Checking empty container workspace form
+            if (totalFieldsCount === 0 || (totalFieldsCount === 1 && emptyMessage.style.display !== 'none')) {
+                showToast("Please add some fields to the form first!", "error");
+                return;
+            }
+
+            // Condition 2: Evaluating input element configurations safely 
+            let emptyInputsFound = false;
+            inputsList.forEach(inputItem => {
+                if (inputItem.value.trim() === "") {
+                    emptyInputsFound = true;
+                }
+            });
+
+            if (emptyInputsFound === true) {
+                showToast("Please fill all the input fields before copying the code!", "error");
+                return;
+            }
+
+            // --- AAPKA IDEA INTEGRATION START ---
+            
+            // 1. Pehle form ka generated inner HTML structural text nikalte hain
+            const actualFormHTML = glassForm.outerHTML;
+            
+            // 2. Ab is form ko ek perfectly matching modern dark background wrapper mein pack karte hain
+            // Taake user ke editor mein paste karte hi piche white screen ke bajaye premium dark gradient aaye!
+            const fullWrappedHTML = `<!-- Copy this complete block into your HTML document -->
+            <div class="bg-gradient-to-br from-indigo-900 via-slate-900 to-purple-900 min-h-screen text-slate-100 p-6 flex flex-col items-center justify-center font-sans">
+                
+                ${actualFormHTML}
+
+            </div>`;
+            
+            // Clipboard safe export transition flow running state
+            navigator.clipboard.writeText(fullWrappedHTML).then(() => {
+                showToast("Form & Background code safely copied!", "success");
+            }).catch(() => {
+                showToast("Error copying code.", "error");
+            });
+        });
     </script>
 </body>
 </html>

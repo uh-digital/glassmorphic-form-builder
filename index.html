@@ -229,13 +229,6 @@
                 ${actualFormHTML}
 
             </div>`;
-            
-            // Clipboard safe export transition flow running state
-            navigator.clipboard.writeText(fullWrappedHTML).then(() => {
-                showToast("Form & Background code safely copied!", "success");
-            }).catch(() => {
-                showToast("Error copying code.", "error");
-            });
         });
     </script>
 </body>

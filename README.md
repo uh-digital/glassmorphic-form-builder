@@ -10,7 +10,7 @@ The project combines a dark cybersecurity-inspired interface with glassmorphism 
 
 ## 📸 Preview
 
-![Glassmorphic Form Builder Preview](assets/Glassmorphic Form Builder.png)
+![Glassmorphic Form Builder Preview](assets/screenshot.png)
 
 ## ✨ Features
 
